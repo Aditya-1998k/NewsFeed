@@ -61,4 +61,21 @@ redoc:
 http://127.0.0.1:8000/redoc
 ```
 
-2. 
+2. How I defined my routes (Modular application)
+Define your routes
+
+app/routes/news.py
+```python
+from fastapi import APIRouter
+router = APIRouter(prefix="/news", tags=["news"])
+# All routes in this router will be prefixed with /news
+# Groups routes in the auto-generated documentation (/docs)
+```
+ Include the router in your main app
+ 
+ main.py
+```python
+from .routes import news
+# Include your routes here
+app.include_router(news.router)
+```
