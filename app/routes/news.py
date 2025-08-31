@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from ..db import db
-from ..services.fetch_news import fetch_and_store_news
+from ..services.fetch_news import sync_news
 
 router = APIRouter(prefix="/news", tags=["news"])
 
@@ -16,5 +16,5 @@ async def get_news():
 @router.post("/fetch")
 async def fetch_news():
     """Fetch latest news from NewsAPI and store in MongoDB"""
-    await fetch_and_store_news()
+    await sync_news()
     return {"status": "ok", "message": "Syncing successfull."}
